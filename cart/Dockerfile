@@ -5,6 +5,11 @@ COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 
 
+
 RUN gradle build --no-daemon --stacktrace
+
+EXPOSE 8080
+
+CMD gradle bootRun
 
 

@@ -1,4 +1,0 @@
-rootProject.name = 'project-e'
-
-include 'cart'
-include 'user'
