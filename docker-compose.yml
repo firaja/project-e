@@ -21,7 +21,8 @@ services:
 
   cart-web:
     build: ./cart/
-
+    volumes:
+      - ./.m2:/root/.m2
     ports:
       - "9001:8080"
     expose:

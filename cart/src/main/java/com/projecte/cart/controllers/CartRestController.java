@@ -1,13 +1,15 @@
 package com.projecte.cart.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequestMapping("/")
 public class CartRestController
 {
-    @GetMapping("/")
+    @GetMapping
     public String get()
     {
         return "Ciao";
