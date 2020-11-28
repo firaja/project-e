@@ -1,0 +1,36 @@
+version: '3.3'
+
+services:
+
+  cart-db:
+    image: mysql:8.0.22
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_USER: 'cartservice'
+      MYSQL_PASS: 'cartservice'
+    volumes:
+      - ./cart-db/mysql_data:/var/lib/mysql
+    ports:
+      - "33000:3306"
+    expose:
+      - "33000"
+    networks:
+      - cart-db-net
+
+
+  cart-web:
+    build: ./cart/
+
+    ports:
+      - "9001:8080"
+    expose:
+      - "9001"
+    networks:
+      - cart-db-net
+
+
+
+
+networks:
+  cart-db-net:

@@ -6,9 +6,9 @@ WORKDIR /home/gradle/src
 
 
 
-RUN gradle build --no-daemon --stacktrace
+RUN gradle build --no-daemon
 
-EXPOSE 8080
+EXPOSE 9001
 
 CMD gradle bootRun
 
