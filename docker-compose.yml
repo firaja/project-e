@@ -2,25 +2,25 @@ version: '3.3'
 
 services:
 
-  cart-db:
+  template-sql:
     image: mysql:8.0.22
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_USER: 'cartservice'
-      MYSQL_PASS: 'cartservice'
+      MYSQL_USER: 'templateuser'
+      MYSQL_PASS: 'templatepassword'
     volumes:
-      - ./cart-db/mysql_data:/var/lib/mysql
+      - ./template-sql/mysql_data:/var/lib/mysql
     ports:
       - "33000:3306"
     expose:
       - "33000"
     networks:
-      - cart-db-net
+      - template-rest-sql-net
 
 
-  cart-web:
-    build: ./cart/
+  template-rest:
+    build: ./template/
     volumes:
       - ./.m2:/root/.m2
     ports:
@@ -28,10 +28,10 @@ services:
     expose:
       - "9001"
     networks:
-      - cart-db-net
+      - template-rest-sql-net
 
 
 
 
 networks:
-  cart-db-net:
+  template-rest-sql-net:
