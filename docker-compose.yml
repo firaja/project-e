@@ -20,6 +20,8 @@ services:
       template-rest-sql-net:
         aliases:
           - template-sql
+    cap_add:
+      - SYS_NICE
 
 
   template-rest:
