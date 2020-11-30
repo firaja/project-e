@@ -8,7 +8,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: templateuser
-      MYSQL_PASS: templatepassword
+      MYSQL_PASSWORD: templatepassword
       MYSQL_DATABASE: template
     volumes:
       - ./template-sql/mysql_data:/var/lib/mysql
@@ -17,11 +17,14 @@ services:
     expose:
       - "3307"
     networks:
-      - template-rest-sql-net
+      template-rest-sql-net:
+        aliases:
+          - template-sql
 
 
   template-rest:
     container_name: template-rest
+    restart: always
     build: ./template/
     volumes:
       - ./.m2:/root/.m2
@@ -33,7 +36,6 @@ services:
       - template-rest-sql-net
     depends_on:
       - template-sql
-
 
 
 
