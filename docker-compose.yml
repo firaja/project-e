@@ -4,22 +4,24 @@ services:
 
   template-sql:
     image: mysql:8.0.22
-    restart: always
+    container_name: template-sql
     environment:
-      MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_USER: 'templateuser'
-      MYSQL_PASS: 'templatepassword'
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: templateuser
+      MYSQL_PASS: templatepassword
+      MYSQL_DATABASE: template
     volumes:
       - ./template-sql/mysql_data:/var/lib/mysql
     ports:
-      - "33000:3306"
+      - "3307:3306"
     expose:
-      - "33000"
+      - "3307"
     networks:
       - template-rest-sql-net
 
 
   template-rest:
+    container_name: template-rest
     build: ./template/
     volumes:
       - ./.m2:/root/.m2
@@ -29,6 +31,8 @@ services:
       - "9001"
     networks:
       - template-rest-sql-net
+    depends_on:
+      - template-sql
 
 
 

@@ -1,4 +1,4 @@
-FROM maven:3.6.3-jdk-11 AS build
+FROM maven:3.6.3-adoptopenjdk-11-openj9 AS build
 WORKDIR /build
 ADD pom.xml /build/pom.xml
 RUN mvn verify clean --fail-never
@@ -8,7 +8,7 @@ RUN mvn clean install
 
 
 
-FROM tomcat:9.0.20-jre11 as server
+FROM tomcat:9.0.20-jre11-slim as server
 RUN rm -rf /usr/local/tomcat/webapps/*
 COPY --from=build /build/target/template.war /usr/local/tomcat/webapps/
 
